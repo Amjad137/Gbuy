@@ -1,12 +1,14 @@
 import { createWithEqualityFn } from "zustand/traditional";
 import { shallow } from "zustand/shallow";
 
-export interface productProps {
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-}
+type productProps = {
+  productData: {
+    Name: string;
+    Description: string;
+    Price: number;
+    ImageLink: string;
+  };
+};
 
 type ProductsStore = {
   products: productProps[];

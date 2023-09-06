@@ -9,10 +9,10 @@ import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type productProps = {
-  name: string;
-  description: string;
-  price: number;
-  image: File[];
+  Name: string;
+  Description: string;
+  Price: number;
+  ImageLink: string;
 };
 
 const Add = () => {
@@ -28,63 +28,64 @@ const Add = () => {
   const onSubmit: SubmitHandler<productProps> = async (data) => {
     setLoading(true);
 
-    const file = data.image[0];
+    const fileInput = document.getElementById(
+      "photosInput"
+    ) as HTMLInputElement | null;
 
-    const storageRef = ref(storage, `files/${file.name}`);
+    if (fileInput && fileInput.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
 
-    const uploadTask = uploadBytes(storageRef, file);
+      const storageRef = ref(storage, `files/${file.name}`);
 
-    await uploadTask
-      .then((snapshot) => {
-        getDownloadURL(storageRef)
-          .then((downloadURL) => {
-            console.log("image is Uploaded");
-            addDoc(collection(db, "productsData"), {
-              name: data.name,
-              description: data.description,
-              price: data.price,
-              image: downloadURL,
+      const uploadTask = uploadBytes(storageRef, file);
+
+      await uploadTask
+        .then((snapshot) => {
+          getDownloadURL(storageRef)
+            .then((downloadURL) => {
+              data.ImageLink = downloadURL;
+              console.log("Image is Uploaded");
+              addDoc(collection(db, "productsData"), {
+                productData: data,
+              });
+            })
+            .then(() => {
+              setLoading(false);
+              alert("Data is Uploaded Successfully!");
+              router.push("/");
+            })
+            .catch((error) => {
+              alert("Error getting download URL: " + error.message);
             });
-          })
-          .then(() => {
-            setLoading(false);
-            alert("Data is Uploaded Successfully!");
-            router.push("/");
-          })
-          .catch((error) => {
-            alert("Error getting download URL: " + error.message);
-          });
-      })
-      .catch((error) => {
-        alert("Error uploading file: " + error.message);
-      });
-    console.log(data);
+        })
+        .catch((error) => {
+          alert("Error uploading file: " + error.message);
+        });
+    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col items-center justify-between p-4 gap-8 shadow-md shadow-slate-500 bg-gray-100">
         <input
-          {...register("name", { required: true })}
+          {...register("Name", { required: true })}
           className="border-2 border-gray-400 rounded-md font-light p-2 focus:outline-none bg-transparent w-full resize-none"
-          placeholder="name"
+          placeholder="Name"
         />
 
         <input
-          {...register("description", { required: true })}
+          {...register("Description", { required: true })}
           className="border-2 border-gray-400 rounded-md font-light p-2 focus:outline-none bg-transparent w-full resize-none"
-          placeholder="description"
+          placeholder="Description"
         />
 
         <input
-          {...register("price", { required: true })}
-          type="number"
+          {...register("Price", { required: true })}
           className="border-2 border-gray-400 rounded-md font-light p-2 focus:outline-none bg-transparent w-full resize-none"
-          placeholder="price"
+          placeholder="Price"
         />
 
         <input
           type="file"
-          {...register("image")}
           id="photosInput"
           className="border-2 border-gray-400 rounded-md font-light p-2 focus:outline-none bg-transparent"
           placeholder="Photo"

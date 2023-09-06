@@ -24,13 +24,13 @@ const SigninBtn = () => {
 
   if (user) {
     return (
-      <div className="text-gray-200 hover:text-gray-800">
+      <div className="text-white hover:text-gray-300">
         <button onClick={signOutUser}>SignOut</button>
       </div>
     );
   } else {
     return (
-      <Link className="text-gray-200 hover:text-gray-800" href="/login">
+      <Link className="text-white hover:text-gray-300" href="/login">
         Signin
       </Link>
     );

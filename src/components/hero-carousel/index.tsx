@@ -1,115 +1,20 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { PrevArrow, NextArrow } from "./arrows";
-import { useCollection } from "react-firebase-hooks/firestore";
-import { collection } from "firebase/firestore";
-import { db } from "@/config/firebase";
-import Slider from "react-slick";
 
-type imgType = {
-  imageLink: string;
-};
+//type Props = {};
 
 const HeroCarousel = () => {
-  const [images, setImages] = useState<imgType[]>([]);
-
-  const [value, Loading, error] = useCollection(
-    collection(db, "heroCarouselImages")
-  );
-
-  useEffect(() => {
-    if (!Loading && value) {
-      const imagesData = value.docs.map((doc) => doc.data() as imgType);
-      setImages(imagesData);
-    }
-  }, [Loading, value]);
-  console.log({ imagesData: images });
-
-  const settingLg = {
-    dots: true,
-    arrows: true,
-    slidesToShow: 1,
-    infinite: true,
-    centerMode: true,
-    centerPadding: "300px",
-    speed: 500,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    cssEase: "linear",
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-  };
-
-  const settings = {
-    dots: false,
-    arrows: true,
-    slidesToShow: 1,
-    infinite: true,
-    speed: 500,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    centerMode: true,
-    centerPadding: "50px",
-    cssEase: "linear",
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-  };
-
   return (
-    <>
-      {/* {images.map((img, key) => (
-        <div
-          className="flex w-full h-96 overflow-hidden z-30"
-          key={img.imageLink}
-        >
-          <h1>HeroSection</h1>
-          <Image
-            src={img.imageLink}
-            alt="Picture of the author"
-            width={800}
-            height={100}
-            className="h-auto w-full shadow-md object-cover"
-            quality={100}
-          />
-        </div>
-      ))} */}
-      <div className="lg:hidden">
-        <Slider {...settings}>
-          {images.map((image, index) => (
-            <div className="w-full h-56 md:h-80 py-3" key={index}>
-              <Image
-                src={image.imageLink}
-                width={1920}
-                height={720}
-                alt="Hero Banner"
-                className="w-full h-full rounded-md object-cover"
-                quality={100}
-              />
-            </div>
-          ))}
-        </Slider>
-      </div>
-      <div className="hidden lg:block">
-        <Slider {...settingLg}>
-          {images.map((image, index) => (
-            <div className="w-full h-56 md:h-80 py-3" key={index}>
-              <Image
-                src={image.imageLink}
-                width={1920}
-                height={720}
-                alt="Hero Banner"
-                className="w-full h-full rounded-md object-cover"
-                quality={100}
-              />
-            </div>
-          ))}
-        </Slider>
-      </div>
-    </>
+    <div className=" ">
+      <Image
+        src=" https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/military-landing-202209?wid=1904&hei=538&fmt=png-alpha&.v=1674593126557"
+        alt="Picture of the author"
+        width={800}
+        height={0}
+        layout="responsive"
+        className=" "
+      />
+    </div>
   );
 };
 
