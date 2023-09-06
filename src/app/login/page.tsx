@@ -35,7 +35,7 @@ const Login = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col items-center justify-between p-4 gap-4 shadow-md shadow-slate-500 bg-slate-100">
+      <div className="flex flex-col items-center w-full max-w-sm mx-auto mt-10 justify-between p-4 gap-4 shadow-md shadow-slate-500 bg-slate-100">
         <input
           {...register("email", { required: true })}
           className="border-2 border-gray-400 rounded-md font-light p-2 focus:outline-none bg-transparent w-full resize-none"

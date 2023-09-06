@@ -1,23 +1,16 @@
 "use client";
-import Image from "next/image";
+
 import { useAuthStore } from "@/store/auth-store";
 import AddNew from "@/components/addnew-button";
-import HeroCarousel from "@/components/hero-carousel";
-import ImageLink from "@/components/image-link";
+import HeroCarousel from "../components/hero-carousel/index";
+import ImageCard from "@/components/image-card";
 import Cards from "@/components/Cards";
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { db } from "@/config/firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useProductsStore } from "@/store/collection-store";
-type productProps = {
-  productData: {
-    Name: string;
-    Description: string;
-    Price: number;
-    ImageLink: string;
-  };
-};
+import { productProps } from "@/store/collection-store";
 
 export default function Home() {
   const { user, loading } = useAuthStore((s) => ({
@@ -58,18 +51,18 @@ export default function Home() {
   return (
     <>
       <HeroCarousel />
-      <ImageLink />
+      <ImageCard />
 
       <div className="flex w-full h-full flex-wrap items-center justify-center">
         {error && <strong>Error: {JSON.stringify(error)}</strong>}
         {collectionLoading && <span>Products: Loading...</span>}
-        {products.map((product) => (
+        {products.map((product, index) => (
           <Cards
-            key={product.productData.Name}
-            Name={product.productData.Name}
-            Description={product.productData.Description}
-            Price={product.productData.Price}
-            Image={product.productData.ImageLink}
+            key={index}
+            name={product.name}
+            description={product.description}
+            price={product.price}
+            image={product.image}
           />
         ))}
       </div>

@@ -1,3 +1,8 @@
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {}
+
+// module.exports = nextConfig
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -18,6 +23,11 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "firebasestorage.googleapis.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "applemagazine.com",
         port: "",
       },
     ],

@@ -9,7 +9,7 @@ const AddNew = () => {
   return (
     <>
       <button onClick={() => router.push("/addnew")}>
-        <BiSolidMessageSquareAdd className="w-10 h-10 text-red-600" />
+        <BiSolidMessageSquareAdd className="w-10 h-10 text-orange-600" />
       </button>
     </>
   );
