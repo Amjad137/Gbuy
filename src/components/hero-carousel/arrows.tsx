@@ -1,27 +1,28 @@
 "use client";
-
-export function NextArrow(props: any) {
+import { ChevronLast } from "lucide-react";
+import { ChevronFirst } from "lucide-react";
+export const NextArrow = (props: any) => {
+  const { className, style, onClick } = props;
   return (
-    <>
-      <div
-        className={props.className}
-        // className="item-end bg-slate-500"
-        // style={{ ...props.style }}
-        style={{ color: "red", padding: "10px" }}
-        onClick={props.onClick}
-      ></div>
-    </>
+    <button
+      className={`custom-next-arrow bg-blue-500 text-white p-2 rounded-full absolute top-1/2 right-4 transform -translate-y-1/2 hover:bg-orange-600 transition-all duration-300 `}
+      style={{ ...style }}
+      onClick={onClick}
+    >
+      <ChevronLast />
+    </button>
   );
-}
+};
 
-export function PrevArrow(props: any) {
+export const PrevArrow = (props: any) => {
+  const { className, style, onClick } = props;
   return (
-    <>
-      <div
-        className={props.className}
-        style={{ ...props.style }}
-        onClick={props.onClick}
-      ></div>
-    </>
+    <button
+      className={`custom-prev-arrow bg-blue-500 text-white p-2 rounded-full absolute top-1/2 left-4 transform -translate-y-1/2 hover:bg-orange-600 transition-all duration-300 `}
+      style={{ ...style }}
+      onClick={onClick}
+    >
+      <ChevronFirst />
+    </button>
   );
-}
+};

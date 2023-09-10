@@ -25,7 +25,6 @@ const HeroCarousel = () => {
       setImages(imagesData);
     }
   }, [Loading, value]);
-  console.log({ imagesData: images });
 
   const settingLg = {
     dots: true,
@@ -61,26 +60,10 @@ const HeroCarousel = () => {
 
   return (
     <>
-      {/* {images.map((img, key) => (
-        <div
-          className="flex w-full h-96 overflow-hidden z-30"
-          key={img.imageLink}
-        >
-          <h1>HeroSection</h1>
-          <Image
-            src={img.imageLink}
-            alt="Picture of the author"
-            width={800}
-            height={100}
-            className="h-auto w-full shadow-md object-cover"
-            quality={100}
-          />
-        </div>
-      ))} */}
       <div className="lg:hidden">
         <Slider {...settings}>
           {images.map((image, index) => (
-            <div className="w-full h-56 md:h-80 py-3" key={index}>
+            <div className="w-full h-56 md:h-80" key={index}>
               <Image
                 src={image.imageLink}
                 width={1920}
@@ -96,7 +79,7 @@ const HeroCarousel = () => {
       <div className="hidden lg:block">
         <Slider {...settingLg}>
           {images.map((image, index) => (
-            <div className="w-full h-56 md:h-80 py-3" key={index}>
+            <div className="w-full h-56 md:h-80" key={index}>
               <Image
                 src={image.imageLink}
                 width={1920}

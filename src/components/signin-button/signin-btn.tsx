@@ -3,28 +3,33 @@ import React from "react";
 import { auth } from "@/config/firebase";
 import { onAuthStateChanged, User, signOut } from "firebase/auth";
 import Link from "next/link";
-
+import { useAuthStore } from "@/store/auth-store";
+import { useCartStore } from "@/store/cart-store";
+import { CartItem } from "@/store/cart-store";
 const SigninBtn = () => {
-  const [user, setUser] = useState<User | null>();
+  const { user, setUser } = useAuthStore((s) => ({
+    user: s.user,
+    setUser: s.setUser,
+  }));
 
+  const { setCart } = useCartStore((s) => ({
+    setCart: s.setCart,
+  }));
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      //   console.log(user);
     });
-    // return () => {
-    //   listen();
-    // };
   });
 
   const signOutUser = async () => {
     await signOut(auth);
-    // window.location.href = "/";
+    setUser(null);
+    // setCart([]);
   };
 
   if (user) {
     return (
-      <div className="text-gray-200 hover:text-gray-800">
+      <div className="flex items-center justify-center text-gray-200 hover:text-gray-800">
         <button onClick={signOutUser}>SignOut</button>
       </div>
     );

@@ -5,14 +5,32 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
-.slick-prev {
-  left: 3% !important;
-  z-index: 1;
+/* Custom styles for the previous (left) arrow */
+.custom-prev-arrow {
+  left: 3%; /* Adjust the left position as needed */
+  z-index: 1; /* Ensure it's above the slider */
+  position: absolute; /* Position it absolutely within the slider container */
+  top: 50%; /* Vertically center the arrow */
+  transform: translateY(-50%); /* Adjust vertical alignment */
+  background-color: rgba(0, 0, 0, 0.5); /* Background color (optional) */
+  color: white; /* Text color (optional) */
+  padding: 8px 12px; /* Padding for the arrow button (optional) */
+  border-radius: 50%; /* Make it round (optional) */
+  cursor: pointer; /* Add a pointer cursor on hover (optional) */
 }
 
-.slick-next {
-  right: 3% !important;
-  z-index: 1;
+/* Custom styles for the next (right) arrow */
+.custom-next-arrow {
+  right: 3%; /* Adjust the right position as needed */
+  z-index: 1; /* Ensure it's above the slider */
+  position: absolute; /* Position it absolutely within the slider container */
+  top: 50%; /* Vertically center the arrow */
+  transform: translateY(-50%); /* Adjust vertical alignment */
+  background-color: rgba(0, 0, 0, 0.5); /* Background color (optional) */
+  color: white; /* Text color (optional) */
+  padding: 8px 12px; /* Padding for the arrow button (optional) */
+  border-radius: 50%; /* Make it round (optional) */
+  cursor: pointer; /* Add a pointer cursor on hover (optional) */
 }
 
 /* :root {

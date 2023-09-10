@@ -4,11 +4,12 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { storage } from "@/config/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db } from "@/config/firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type productProps = {
+  id: string;
   name: string;
   description: string;
   price: number;
@@ -39,7 +40,9 @@ const Add = () => {
         getDownloadURL(storageRef)
           .then((downloadURL) => {
             console.log("image is Uploaded");
-            addDoc(collection(db, "productsData"), {
+            const productRef = doc(collection(db, "productsData"));
+            setDoc(productRef, {
+              id: productRef.id,
               name: data.name,
               description: data.description,
               price: data.price,
@@ -62,31 +65,31 @@ const Add = () => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col items-center justify-between p-4 gap-8 shadow-md shadow-slate-500 bg-gray-100">
+      <div className="flex flex-col items-center justify-between p-4 gap-8 mx-auto mt-10 mb-10 w-full max-w-md shadow-md shadow-slate-500 bg-gray-100">
         <input
           {...register("name", { required: true })}
           className="border-2 border-gray-400 rounded-md font-light p-2 focus:outline-none bg-transparent w-full resize-none"
-          placeholder="name"
+          placeholder="Name"
         />
 
         <input
           {...register("description", { required: true })}
           className="border-2 border-gray-400 rounded-md font-light p-2 focus:outline-none bg-transparent w-full resize-none"
-          placeholder="description"
+          placeholder="Description"
         />
 
         <input
           {...register("price", { required: true })}
           type="number"
           className="border-2 border-gray-400 rounded-md font-light p-2 focus:outline-none bg-transparent w-full resize-none"
-          placeholder="price"
+          placeholder="Price"
         />
 
         <input
           type="file"
           {...register("image")}
           id="photosInput"
-          className="border-2 border-gray-400 rounded-md font-light p-2 focus:outline-none bg-transparent"
+          className="border-2 border-gray-400 rounded-md font-light max-w-full p-2 focus:outline-none bg-transparent "
           placeholder="Photo"
         />
         <button

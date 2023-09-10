@@ -1,3 +1,4 @@
+"use client";
 import { PropsWithChildren, useState, useEffect } from "react";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/config/firebase";
@@ -27,6 +28,7 @@ const AuthProvider = (props: Props) => {
       unsubscribe();
     };
   });
+
   return <>{props.children}</>;
 };
 

@@ -1,11 +1,10 @@
-"use client";
-
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/nav-bar";
-import Footer from "@/components/Footer";
+import Footer from "@/components/footer";
 import AuthProvider from "@/provider/auth-provider";
+import CartProvider from "@/provider/cart-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,9 +23,11 @@ export default function RootLayout({
       <body>
         <main className={inter.className}>
           <AuthProvider>
+            {/* <CartProvider> */}
             <Navbar />
             {children}
             <Footer />
+            {/* </CartProvider> */}
           </AuthProvider>
         </main>
       </body>

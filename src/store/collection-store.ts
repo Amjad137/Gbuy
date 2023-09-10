@@ -2,6 +2,7 @@ import { createWithEqualityFn } from "zustand/traditional";
 import { shallow } from "zustand/shallow";
 
 export interface productProps {
+  id: string;
   name: string;
   description: string;
   price: number;
